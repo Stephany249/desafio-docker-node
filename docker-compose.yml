@@ -3,7 +3,7 @@ version: '3'
 services:
   app:
     build:
-      context: node
+      context: ./node
     container_name: app
     entrypoint: dockerize -wait tcp://db:3306 -timeout 120s docker-entrypoint.sh
     command: "node index.js"
@@ -11,6 +11,7 @@ services:
       - node-network
     volumes:
       - ./node:/usr/src/app
+      - /usr/src/app/node_modules
     tty: true
     ports:
       - "3000:3000"
